@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SecureVote - Online Voting Systems</title>
+    <title>SecureVote - Online Voting System</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
@@ -227,7 +227,9 @@
         border-radius: 10px;
         overflow: hidden;
         box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.1);
-        transition: transform 0.3s, box-shadow 0.3s;
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
         border: 1px solid #e3e6f0;
       }
 
@@ -1092,7 +1094,7 @@
               0,
               "Genesis Block",
               "0",
-              new Date().toISOString()
+              new Date().toISOString(),
             ),
           };
 
@@ -1168,7 +1170,7 @@
 
           localStorage.setItem(
             "electionSettings",
-            JSON.stringify(electionSettings)
+            JSON.stringify(electionSettings),
           );
 
           // Mark system as initialized
@@ -1183,7 +1185,7 @@
       // Blockchain functions
       function calculateHash(index, data, previousHash, timestamp) {
         return CryptoJS.SHA256(
-          index + data + previousHash + timestamp
+          index + data + previousHash + timestamp,
         ).toString();
       }
 
@@ -1196,7 +1198,7 @@
           newIndex,
           JSON.stringify(voteData),
           previousBlock.hash,
-          timestamp
+          timestamp,
         );
 
         const newBlock = {
@@ -1225,7 +1227,7 @@
             currentBlock.index,
             currentBlock.data,
             currentBlock.previousHash,
-            currentBlock.timestamp
+            currentBlock.timestamp,
           );
 
           if (currentBlock.hash !== calculatedHash) {
@@ -1394,7 +1396,7 @@
             alert(
               isValid
                 ? "Blockchain integrity verified successfully!"
-                : "Blockchain integrity check failed!"
+                : "Blockchain integrity check failed!",
             );
           });
       }
@@ -1405,7 +1407,7 @@
         const candidates = JSON.parse(localStorage.getItem("candidates"));
         const votes = JSON.parse(localStorage.getItem("votes"));
         const electionSettings = JSON.parse(
-          localStorage.getItem("electionSettings")
+          localStorage.getItem("electionSettings"),
         );
 
         // Update stats
@@ -1423,10 +1425,10 @@
             .map((vote) => {
               return `<div class="activity-item mb-2">
                         <strong>${vote.voterName}</strong> voted for <strong>${
-                vote.candidateName
-              }</strong>
+                          vote.candidateName
+                        }</strong>
                         <small class="text-gray">${new Date(
-                          vote.timestamp
+                          vote.timestamp,
                         ).toLocaleString()}</small>
                     </div>`;
             })
@@ -1455,14 +1457,14 @@
                     <div class="candidate-card">
                         <div class="candidate-img">
                             <img src="${candidate.image}" alt="${
-            candidate.name
-          }">
+                              candidate.name
+                            }">
                         </div>
                         <div class="candidate-info">
                             <h4>${candidate.name}</h4>
                             <p><strong>${candidate.party}</strong> - ${
-            candidate.position
-          }</p>
+                              candidate.position
+                            }</p>
                             <p>${candidate.bio}</p>
                             <button class="vote-btn" data-candidate-id="${
                               candidate.id
@@ -1478,7 +1480,7 @@
         document.querySelectorAll(".vote-btn").forEach((button) => {
           button.addEventListener("click", function () {
             const candidateId = parseInt(
-              this.getAttribute("data-candidate-id")
+              this.getAttribute("data-candidate-id"),
             );
             castVote(candidateId);
           });
@@ -1536,7 +1538,7 @@
 
         // Show success message
         alert(
-          `Thank you for voting for ${candidate.name}! Your vote has been securely recorded.`
+          `Thank you for voting for ${candidate.name}! Your vote has been securely recorded.`,
         );
 
         // Update blockchain hash display
@@ -1673,7 +1675,7 @@
         // Load candidates
         const candidates = JSON.parse(localStorage.getItem("candidates"));
         const candidatesTable = document.getElementById(
-          "candidates-admin-table"
+          "candidates-admin-table",
         );
         candidatesTable.innerHTML = "";
 
@@ -1712,14 +1714,14 @@
 
         // Load election settings
         const electionSettings = JSON.parse(
-          localStorage.getItem("electionSettings")
+          localStorage.getItem("electionSettings"),
         );
         document.getElementById("election-title").value =
           electionSettings.title;
         document.getElementById("election-start").value =
           formatDateTimeForInput(new Date(electionSettings.start));
         document.getElementById("election-end").value = formatDateTimeForInput(
-          new Date(electionSettings.end)
+          new Date(electionSettings.end),
         );
         document.getElementById("election-status").value =
           electionSettings.status;
@@ -1728,9 +1730,8 @@
         const blockchain = JSON.parse(localStorage.getItem("blockchain"));
         document.getElementById("admin-blockchain-hash").textContent =
           blockchain[blockchain.length - 1].hash;
-        document.getElementById(
-          "blockchain-length"
-        ).textContent = `${blockchain.length} blocks`;
+        document.getElementById("blockchain-length").textContent =
+          `${blockchain.length} blocks`;
 
         // Load blockchain table
         const blockchainTable = document.getElementById("blockchain-table");
@@ -1746,11 +1747,11 @@
                         }</td>
                         <td><small>${block.previousHash.substring(
                           0,
-                          20
+                          20,
                         )}...</small></td>
                         <td><small>${block.hash.substring(
                           0,
-                          20
+                          20,
                         )}...</small></td>
                     </tr>
                 `;
@@ -1819,7 +1820,7 @@
 
         localStorage.setItem(
           "electionSettings",
-          JSON.stringify(electionSettings)
+          JSON.stringify(electionSettings),
         );
 
         // Update countdown timer
@@ -1873,7 +1874,7 @@
 
       function startCountdown() {
         const electionSettings = JSON.parse(
-          localStorage.getItem("electionSettings")
+          localStorage.getItem("electionSettings"),
         );
         const endDate = new Date(electionSettings.end);
 
@@ -1891,9 +1892,9 @@
           const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
           document.getElementById("time-remaining").textContent = `${String(
-            hours
+            hours,
           ).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(
-            seconds
+            seconds,
           ).padStart(2, "0")}`;
 
           // Update progress bar (simplified)
@@ -1902,7 +1903,7 @@
           const elapsed = now - new Date(electionSettings.start);
           const percentage = Math.min(
             100,
-            Math.max(0, (elapsed / totalDuration) * 100)
+            Math.max(0, (elapsed / totalDuration) * 100),
           );
 
           document
