@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    SecureVote - Online Voting System
+  </title>
+
+  <!-- Google Font -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  >
+
+  <!-- Chart.js -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/chart.js"
+  ></script>
+
+  <!-- CryptoJS -->
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"
+  ></script>
+
+
+  
+
+  <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+  <!-- =========================================
+       MAIN CONTAINER
+  ========================================== -->
+
+  <div class="container">
+
+
+    <!-- =======================================
+         SIDEBAR
+    ======================================== -->
+
+    <aside class="sidebar">
+
+
+      <div class="sidebar-header">
+
+        <h3>
+
+          <i class="fas fa-vote-yea"></i>
+
+          SecureVote
+
+        </h3>
+
+      </div>
+
+
+      <nav class="sidebar-menu">
+
+        <ul>
+
+
+          <li>
+
+            <a
+              href="#dashboard"
+              id="dashboard-tab"
+              class="active"
+            >
+
+              <i class="fas fa-tachometer-alt"></i>
+
+              Dashboard
+
+            </a>
+
+          </li>
+
+
+          <li>
+
+            <a
+              href="#vote"
+              id="vote-tab"
+            >
+
+              <i class="fas fa-vote-yea"></i>
+
+              Cast Vote
+
+            </a>
+
+          </li>
+
+
+          <li>
+
+            <a
+              href="#results"
+              id="results-tab"
+            >
+
+              <i class="fas fa-chart-bar"></i>
+
+              Results
+
+            </a>
+
+          </li>
+
+
+          <li>
+
+            <a
+              href="#admin"
+              id="admin-tab"
+            >
+
+              <i class="fas fa-user-shield"></i>
+
+              Admin Panel
+
+            </a>
+
+          </li>
+
+
+          <li>
+
+            <a
+              href="#blockchain"
+              id="blockchain-tab"
+            >
+
+              <i class="fas fa-link"></i>
+
+              Blockchain
+
+            </a>
+
+          </li>
+
+
+          <li>
+
+            <a
+              href="#"
+              id="logout-tab"
+            >
+
+              <i class="fas fa-sign-out-alt"></i>
+
+              Logout
+
+            </a>
+
+          </li>
+
+
+        </ul>
+
+      </nav>
+
+    </aside>
+
+
+    <!-- =======================================
+         MAIN CONTENT
+    ======================================== -->
+
+    <main class="main-content">
+
+
+      <!-- HEADER -->
+
+      <header class="header">
+
+        <h1 id="page-title">
+          Dashboard
+        </h1>
+
+
+        <div class="user-info">
+
+          <img
+            src="https://ui-avatars.com/api/?name=John+Doe&background=4e73df&color=fff"
+            alt="User"
+          >
+
+          <span>
+            John Doe (Voter)
+          </span>
+
+        </div>
+
+      </header>
+
+
+      <!-- =====================================
+           DASHBOARD
+      ====================================== -->
+
+      <section
+        id="dashboard-content"
+        class="tab-content active"
+      >
+
+
+        <div class="stats-container">
+
+
+          <div class="stat-card primary">
+
+            <h6>
+              Total Votes
+            </h6>
+
+            <h2 id="total-votes">
+              0
+            </h2>
+
+            <div class="progress">
+
+              <div
+                id="votes-progress"
+                class="progress-bar"
+                style="
+                  background:#4e73df;
+                "
+              ></div>
+
+            </div>
+
+            <small>
+              Updated in real-time
+            </small>
+
+          </div>
+
+
+          <div class="stat-card success">
+
+            <h6>
+              Voters Registered
+            </h6>
+
+            <h2 id="total-voters">
+              0
+            </h2>
+
+            <div class="progress">
+
+              <div
+                class="progress-bar"
+                style="
+                  width:100%;
+                  background:#1cc88a;
+                "
+              ></div>
+
+            </div>
+
+            <small>
+              Registered voters
+            </small>
+
+          </div>
+
+
+          <div class="stat-card warning">
+
+            <h6>
+              Active Candidates
+            </h6>
+
+            <h2 id="total-candidates">
+              0
+            </h2>
+
+            <div class="progress">
+
+              <div
+                class="progress-bar"
+                style="
+                  width:100%;
+                  background:#f6c23e;
+                "
+              ></div>
+
+            </div>
+
+            <small>
+              Verified candidates
+            </small>
+
+          </div>
+
+
+          <div class="stat-card danger">
+
+            <h6>
+              Time Remaining
+            </h6>
+
+            <h2 id="time-remaining">
+              00:00:00
+            </h2>
+
+            <div class="progress">
+
+              <div
+                class="progress-bar"
+                style="
+                  width:100%;
+                  background:#e74a3b;
+                "
+              ></div>
+
+            </div>
+
+            <small>
+              Election countdown
+            </small>
+
+          </div>
+
+
+        </div>
+
+
+        <!-- RECENT ACTIVITY -->
+
+        <div class="card">
+
+          <div class="card-header">
+
+            <h5>
+              Recent Activity
+            </h5>
+
+          </div>
+
+
+          <div class="card-body">
+
+            <div id="recent-activity">
+
+              <p>
+                No recent activity yet.
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =====================================
+           VOTING PAGE
+      ====================================== -->
+
+      <section
+        id="vote-content"
+        class="tab-content"
+      >
+
+
+        <div class="card">
+
+
+          <div class="card-header">
+
+            <h5 id="election-title-display">
+              Presidential Election 2026
+            </h5>
+
+
+            <span
+              id="election-status-badge"
+              class="badge badge-success"
+            >
+              Live
+            </span>
+
+          </div>
+
+
+          <div class="card-body">
+
+
+            <p id="voting-message">
+
+              Please select your preferred
+              candidate below.
+              You can only vote once.
+
+            </p>
+
+
+            <div
+              id="candidates-list"
+              class="candidates-container"
+            ></div>
+
+
+            <!-- BLOCKCHAIN -->
+
+            <div class="blockchain-info">
+
+              <h6>
+                Blockchain Security Verification
+              </h6>
+
+              <p id="blockchain-hash">
+                Loading...
+              </p>
+
+            </div>
+
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =====================================
+           RESULTS
+      ====================================== -->
+
+      <section
+        id="results-content"
+        class="tab-content"
+      >
+
+
+        <div class="card">
+
+
+          <div class="card-header">
+
+            <h5>
+              Election Results
+            </h5>
+
+          </div>
+
+
+          <div class="card-body">
+
+
+            <div class="chart-container">
+
+              <canvas
+                id="results-chart"
+              ></canvas>
+
+            </div>
+
+
+            <div class="table-responsive mt-3">
+
+              <table>
+
+                <thead>
+
+                  <tr>
+
+                    <th>
+                      Candidate
+                    </th>
+
+                    <th>
+                      Party
+                    </th>
+
+                    <th>
+                      Votes
+                    </th>
+
+                    <th>
+                      Percentage
+                    </th>
+
+                  </tr>
+
+                </thead>
+
+
+                <tbody
+                  id="results-table"
+                ></tbody>
+
+              </table>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =====================================
+           ADMIN
+      ====================================== -->
+
+      <section
+        id="admin-content"
+        class="tab-content"
+      >
+
+
+        <div class="card">
+
+
+          <div class="card-header">
+
+            <h5>
+              Admin Dashboard
+            </h5>
+
+          </div>
+
+
+          <div class="card-body">
+
+
+            <!-- ADMIN TABS -->
+
+            <div class="tabs">
+
+
+              <div
+                class="tab active"
+                data-tab="voters"
+              >
+                Voters
+              </div>
+
+
+              <div
+                class="tab"
+                data-tab="candidates"
+              >
+                Candidates
+              </div>
+
+
+              <div
+                class="tab"
+                data-tab="votes"
+              >
+                Votes
+              </div>
+
+
+              <div
+                class="tab"
+                data-tab="settings"
+              >
+                Election Settings
+              </div>
+
+
+            </div>
+
+
+            <!-- =================================
+                 VOTERS TAB
+            ================================== -->
+
+            <div
+              id="admin-voters"
+              class="tab-content active"
+            >
+
+              <div class="table-responsive">
+
+                <table>
+
+                  <thead>
+
+                    <tr>
+
+                      <th>
+                        ID
+                      </th>
+
+                      <th>
+                        Name
+                      </th>
+
+                      <th>
+                        Email
+                      </th>
+
+                      <th>
+                        Status
+                      </th>
+
+                      <th>
+                        Voted
+                      </th>
+
+                    </tr>
+
+                  </thead>
+
+
+                  <tbody
+                    id="voters-table"
+                  ></tbody>
+
+                </table>
+
+              </div>
+
+            </div>
+
+
+            <!-- =================================
+                 CANDIDATES TAB
+            ================================== -->
+
+            <div
+              id="admin-candidates"
+              class="tab-content"
+            >
+
+
+              <button
+                id="add-candidate-btn"
+                class="btn btn-primary mb-3"
+              >
+
+                <i class="fas fa-plus"></i>
+
+                Add Candidate
+
+              </button>
+
+
+              <div class="table-responsive">
+
+                <table>
+
+                  <thead>
+
+                    <tr>
+
+                      <th>
+                        ID
+                      </th>
+
+                      <th>
+                        Name
+                      </th>
+
+                      <th>
+                        Party
+                      </th>
+
+                      <th>
+                        Position
+                      </th>
+
+                      <th>
+                        Votes
+                      </th>
+
+                      <th>
+                        Actions
+                      </th>
+
+                    </tr>
+
+                  </thead>
+
+
+                  <tbody
+                    id="candidates-admin-table"
+                  ></tbody>
+
+                </table>
+
+              </div>
+
+            </div>
+
+
+            <!-- =================================
+                 VOTES TAB
+            ================================== -->
+
+            <div
+              id="admin-votes"
+              class="tab-content"
+            >
+
+              <div class="table-responsive">
+
+                <table>
+
+                  <thead>
+
+                    <tr>
+
+                      <th>
+                        Vote ID
+                      </th>
+
+                      <th>
+                        Voter
+                      </th>
+
+                      <th>
+                        Candidate
+                      </th>
+
+                      <th>
+                        Time
+                      </th>
+
+                      <th>
+                        Block Hash
+                      </th>
+
+                    </tr>
+
+                  </thead>
+
+
+                  <tbody
+                    id="votes-table"
+                  ></tbody>
+
+                </table>
+
+              </div>
+
+            </div>
+
+
+            <!-- =================================
+                 SETTINGS TAB
+            ================================== -->
+
+            <div
+              id="admin-settings"
+              class="tab-content"
+            >
+
+
+              <!-- CURRENT STATUS -->
+
+              <div
+                id="admin-status-box"
+                class="status-box status-active"
+              >
+
+                <h6>
+                  Current Election Status
+                </h6>
+
+                <strong
+                  id="admin-current-status"
+                >
+                  ACTIVE
+                </strong>
+
+              </div>
+
+
+              <!-- ELECTION SETTINGS -->
+
+              <div class="card">
+
+                <div class="card-header">
+
+                  <h5>
+                    Election Settings
+                  </h5>
+
+                </div>
+
+
+                <div class="card-body">
+
+
+                  <form
+                    id="election-settings"
+                  >
+
+
+                    <!-- TITLE -->
+
+                    <div class="form-group">
+
+                      <label>
+                        Election Title
+                      </label>
+
+                      <input
+                        id="election-title"
+                        class="form-control"
+                        type="text"
+                        required
+                      >
+
+                    </div>
+
+
+                    <!-- START -->
+
+                    <div class="form-group">
+
+                      <label>
+                        Start Date & Time
+                      </label>
+
+                      <input
+                        id="election-start"
+                        class="form-control"
+                        type="datetime-local"
+                        required
+                      >
+
+                    </div>
+
+
+                    <!-- END -->
+
+                    <div class="form-group">
+
+                      <label>
+                        End Date & Time
+                      </label>
+
+                      <input
+                        id="election-end"
+                        class="form-control"
+                        type="datetime-local"
+                        required
+                      >
+
+                    </div>
+
+
+                    <!-- MAX VOTES PER VOTER -->
+
+                    <div class="form-group">
+
+                      <label>
+                        Maximum Votes Per Voter
+                      </label>
+
+                      <input
+                        id="max-votes-per-voter"
+                        class="form-control"
+                        type="number"
+                        min="1"
+                        max="10"
+                        value="1"
+                        required
+                      >
+
+                      <small class="text-gray">
+                        Set how many times one voter can vote in this election (1-10).
+                      </small>
+
+                    </div>
+
+
+                    <!-- STATUS -->
+
+                    <div class="form-group">
+
+                      <label>
+                        Election Status
+                      </label>
+
+                      <select
+                        id="election-status"
+                        class="form-control"
+                      >
+
+                        <option value="pending" selected>
+                          Pending - Not Started
+                        </option>
+
+                        <option value="active">
+                          Active
+                        </option>
+
+                        <option value="stopped">
+                          Stopped
+                        </option>
+
+                        <option value="completed">
+                          Completed
+                        </option>
+
+                      </select>
+
+                    </div>
+
+
+                    <!-- SAVE -->
+
+                    <button
+                      class="btn btn-primary"
+                      type="submit"
+                    >
+
+                      <i class="fas fa-save"></i>
+
+                      Save Settings
+
+                    </button>
+
+
+                    <!-- START / STOP -->
+
+                    <div
+                      class="election-controls"
+                    >
+
+
+                      <button
+                        type="button"
+                        id="stop-election-btn"
+                        class="btn btn-danger"
+                      >
+
+                        <i
+                          class="fas fa-stop-circle"
+                        ></i>
+
+                        Stop Election
+
+                      </button>
+
+
+                      <button
+                        type="button"
+                        id="start-election-btn"
+                        class="btn btn-success"
+                      >
+
+                        <i
+                          class="fas fa-play-circle"
+                        ></i>
+
+                        Start Election
+
+                      </button>
+
+
+                    </div>
+
+
+                  </form>
+
+                </div>
+
+              </div>
+
+
+              <!-- =================================
+                   BLOCKCHAIN SETTINGS
+              ================================== -->
+
+              <div class="card mt-3">
+
+                <div class="card-header">
+
+                  <h5>
+                    Blockchain Settings
+                  </h5>
+
+                </div>
+
+
+                <div class="card-body">
+
+
+                  <div class="form-group">
+
+                    <label>
+                      Current Blockchain Hash
+                    </label>
+
+                    <p
+                      id="admin-blockchain-hash"
+                      class="blockchain-info"
+                    >
+                      Loading...
+                    </p>
+
+                  </div>
+
+
+                  <div class="form-group">
+
+                    <label>
+                      Blockchain Length
+                    </label>
+
+                    <p id="blockchain-length">
+                      0 blocks
+                    </p>
+
+                  </div>
+
+
+                  <button
+                    id="verify-blockchain-btn"
+                    class="btn btn-primary"
+                  >
+
+                    <i
+                      class="fas fa-shield-alt"
+                    ></i>
+
+                    Verify Blockchain Integrity
+
+                  </button>
+
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =====================================
+           BLOCKCHAIN PAGE
+      ====================================== -->
+
+      <section
+        id="blockchain-content"
+        class="tab-content"
+      >
+
+
+        <div class="card">
+
+
+          <div class="card-header">
+
+            <h5>
+              Blockchain Explorer
+            </h5>
+
+          </div>
+
+
+          <div class="card-body">
+
+
+            <div class="blockchain-info">
+
+              <h6>
+                About Blockchain Security
+              </h6>
+
+              <p>
+
+                Each vote is recorded as a block.
+                Every block contains the hash of
+                the previous block.
+
+              </p>
+
+            </div>
+
+
+            <div class="table-responsive mt-3">
+
+              <table>
+
+                <thead>
+
+                  <tr>
+
+                    <th>
+                      Block #
+                    </th>
+
+                    <th>
+                      Timestamp
+                    </th>
+
+                    <th>
+                      Vote ID
+                    </th>
+
+                    <th>
+                      Previous Hash
+                    </th>
+
+                    <th>
+                      Current Hash
+                    </th>
+
+                  </tr>
+
+                </thead>
+
+
+                <tbody
+                  id="blockchain-table"
+                ></tbody>
+
+              </table>
+
+            </div>
+
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+    </main>
+
+  </div>
+
+
+  <!-- =========================================
+       ADMIN LOGIN MODAL
+  ========================================== -->
+
+  <div
+    id="login-modal"
+    class="modal"
+  >
+
+
+    <div class="login-card">
+
+
+      <div class="login-header">
+
+        <h3>
+
+          <i class="fas fa-lock"></i>
+
+          Admin Login
+
+        </h3>
+
+      </div>
+
+
+      <div class="login-body">
+
+
+        <form
+          id="admin-login-form"
+        >
+
+
+          <div class="form-group">
+
+            <label>
+              Username
+            </label>
+
+            <input
+              id="admin-username"
+              class="form-control"
+              type="text"
+              placeholder="Enter username"
+              required
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Password
+            </label>
+
+            <input
+              id="admin-password"
+              class="form-control"
+              type="password"
+              placeholder="Enter password"
+              required
+            >
+
+          </div>
+
+
+          <button
+            class="btn btn-primary btn-block"
+            type="submit"
+          >
+
+            Login
+
+          </button>
+
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================
+       ADD CANDIDATE MODAL
+  ========================================== -->
+
+  <div
+    id="candidate-modal"
+    class="modal"
+  >
+
+
+    <div class="login-card">
+
+
+      <div class="login-header">
+
+        <h3>
+
+          <i class="fas fa-user-plus"></i>
+
+          <span id="candidate-modal-title">Add Candidate</span>
+
+        </h3>
+
+      </div>
+
+
+      <div class="login-body">
+
+
+        <form
+          id="candidate-form"
+        >
+
+          <input
+            id="candidate-id"
+            type="hidden"
+          >
+
+
+          <div class="form-group">
+
+            <label>
+              Full Name
+            </label>
+
+            <input
+              id="candidate-name"
+              class="form-control"
+              type="text"
+              required
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Party
+            </label>
+
+            <input
+              id="candidate-party"
+              class="form-control"
+              type="text"
+              required
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Position
+            </label>
+
+            <input
+              id="candidate-position"
+              class="form-control"
+              type="text"
+              value="President"
+              required
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Bio
+            </label>
+
+            <textarea
+              id="candidate-bio"
+              class="form-control"
+              placeholder="Candidate bio"
+            ></textarea>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Image URL
+            </label>
+
+            <input
+              id="candidate-image"
+              class="form-control"
+              type="url"
+              placeholder="https://..."
+            >
+
+          </div>
+
+
+          <div class="modal-actions">
+
+
+            <button
+              type="submit"
+              class="btn btn-primary"
+            >
+
+              Save Candidate
+
+            </button>
+
+
+            <button
+              type="button"
+              id="cancel-candidate-btn"
+              class="btn btn-danger"
+            >
+
+              Cancel
+
+            </button>
+
+
+          </div>
+
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================
+       JAVASCRIPT
+  ========================================== -->
+
+  
+
+
+  <!-- =========================================
+       JAVASCRIPT FILES
+  ========================================== -->
+
+  <script src="js/app.js"></script>
+  <script src="js/system.js"></script>
+  <script src="js/blockchain.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/voting.js"></script>
+  <script src="js/results.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/countdown.js"></script>
+
+</body>
+</html>
