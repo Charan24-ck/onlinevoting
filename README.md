@@ -1,4 +1,5 @@
-# SecureVote - Organized Version
+# SecureVote 
+
 
 ## Structure
 
